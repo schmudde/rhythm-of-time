@@ -1,4 +1,4 @@
-# rhythm-of-time
+# Rhythm of Time
 
 Music step sequencer for web browsers.
 
