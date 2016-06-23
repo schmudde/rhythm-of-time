@@ -9,7 +9,7 @@
   (q/color-mode :hsb)
   {:stages '(1 0 0 0 0 0 0 0)
    :frequencies [500 600 700 800 900 1000 1100 1200]
-   :stages2 '(0 0 0 1 0 0 0 0)
+   :stages2 '(1 0 0 0 0 0 0 0)
    :frequencies2 [1000 1200 1400 1600 1800 2000 2200 2400]
    :audio1 true
    :audio2 true
@@ -56,8 +56,8 @@
        :stages2 (:stage sequencer2)
        :frequencies2 (:frequency sequencer2)
        :audio2 (:audio sequencer2)
-       :tempo1 120
-       :tempo2 60}
+       :tempo1 (:tempo1 state)
+       :tempo2 (:tempo2 state)}
 ))
 
 (defn stage-value [stage-state]
@@ -67,6 +67,7 @@
 (defn gain-value [audio-on-off]
   (if audio-on-off
     0.1
+    ;0.0
     0.0))
 
 (defn draw-stage! [stage position-x position-y]
@@ -85,16 +86,40 @@
       (draw-stage! (stage-value (nth (:stages2 state) i)) i 20))
     ))
 
-(defn plus [x y]
-  (+ x y))
-
 (defn framer [x]
   (q/fill 100 100 100 100))
+
+(defn update-tempo [state]
+  (assoc-in state [:tempo2] 120))
+
+(defn reset [state]
+  (-> state
+    (assoc-in [:stages] '(0 0 0 0 0 0 0 1)) ; note that this starts at the end of the sequence
+    (assoc-in [:frequencies] [500 600 700 800 900 1000 1100 1200])
+    (assoc-in [:stages2] '(0 0 0 0 0 0 0 1)) ; note that this starts at the end of the sequence
+    (assoc-in [:frequencies2] [1000 1200 1400 1600 1800 2000 2200 2400])))
+
+(defn stop! [state]
+  (q/no-loop)
+  state)
+
+(defn start! [state]
+  (q/start-loop)
+  state)
+
+(defn interactive [state event]
+  (case (str (:raw-key event))
+    "s" (stop! state)
+    "b" (start! state)
+    "t" (update-state (update-tempo state))
+    "r" (reset state)
+    state))
 
 (q/defsketch sequencer
   :host "sequencer"
   :setup setup
   :draw draw-state
   :update update-state
+  :key-pressed interactive
   :size [500 300]
   :middleware [m/fun-mode])
