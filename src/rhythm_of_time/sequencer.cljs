@@ -6,7 +6,7 @@
 
 (defn setup []
   (q/frame-rate 5)
-  (q/color-mode :hsb)
+  (q/color-mode :rgb)
   {:stages '(1 0 0 0 0 0 0 0)
    :frequencies [500 600 700 800 900 1000 1100 1200]
    :stages2 '(1 0 0 0 0 0 0 0)
@@ -71,12 +71,13 @@
     0.0))
 
 (defn draw-stage! [stage position-x position-y]
-    (q/fill 255 235 95 stage)
-    (q/ellipse (+ 100 (* position-x 20)) (+ 220 position-y) 15 15))
+    (q/fill 255 255 255 stage)
+    (q/stroke 200 200 200)
+    (q/ellipse (+ 50 (* position-x 20)) (+ 30 position-y) 15 15))
 
 (defn draw-state [state]
   "Side effect: draws state onto screen"
-  (q/background 200)
+  (q/background 0)
 
   (let [length-of-sequencer (count (:stages state))]
     (synth/ping! (first (:frequencies state)) (gain-value (:audio1 state)))
@@ -85,9 +86,6 @@
       (draw-stage! (stage-value (nth (:stages state) i)) i 0)
       (draw-stage! (stage-value (nth (:stages2 state) i)) i 20))
     ))
-
-(defn framer [x]
-  (q/fill 100 100 100 100))
 
 (defn update-tempo [state]
   (assoc-in state [:tempo2] 120))
@@ -107,6 +105,9 @@
   (q/start-loop)
   state)
 
+                                        ;(defn ^:export start-test [] (js/console.log "test"))
+(defn ^:export start-test [] (js/console.log (q/state)))
+
 (defn interactive [state event]
   (case (str (:raw-key event))
     "s" (stop! state)
@@ -121,5 +122,5 @@
   :draw draw-state
   :update update-state
   :key-pressed interactive
-  :size [500 300]
+  :size [260 80]
   :middleware [m/fun-mode])
