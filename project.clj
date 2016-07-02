@@ -12,7 +12,8 @@
                   :exclusions [org.clojure/tools.reader]]
                  [quil "2.4.0"]
                  [leipzig "0.10.0"]
-                 [cljs-bach "0.2.0"]]
+                 [cljs-bach "0.2.0"]
+                 [prismatic/dommy "1.1.0"]]
 
   :plugins [[lein-figwheel "0.5.4-3"]
             [lein-cljsbuild "1.1.3" :exclusions [[org.clojure/clojure]]]]
