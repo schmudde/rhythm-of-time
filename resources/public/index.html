@@ -34,29 +34,30 @@
     Start</button>
   <button onclick="stopSketch();">
     Stop</button>
-  <button onclick="adjustTempo();">
-    Tempo</button>
+  <!-- <button onclick="adjustTempo();"> -->
+  <!--   Tempo</button> -->
+  <button onclick="resetSequencer();">
+    Reset</button>
+  <input id="tempo" type="range" min="1" max="120" step="1" defaultValue="60">
   <button id="film-button" class="sequencer">Reveal Film</button>
 
   <script type="application/javascript">
     var processingInstance;
 
     function startSketch() {
-      switchSketchState(true);
+      rhythm_of_time.quil_js_api.start_loop("sequencer");
     }
 
     function stopSketch() {
-      switchSketchState(false);
+      rhythm_of_time.quil_js_api.stop_loop("sequencer");
     }
 
     function adjustTempo() {
-      processingInstance = Processing.getInstanceById('sequencer');
-      var state = rhythm_of_time.sequencer.state(processingInstance);
-      var state_js = rhythm_of_time.sequencer.state_js(processingInstance);
-      console.log("State: " + state);
-      console.log(state_js);
-      rhythm_of_time.sequencer.update_tempo3(processingInstance);
+      rhythm_of_time.quil_js_api.update_tempo("sequencer");
+    }
 
+    function resetSequencer() {
+      rhythm_of_time.quil_js_api.reset_state("sequencer");
     }
 
     function switchSketchState(on) {
