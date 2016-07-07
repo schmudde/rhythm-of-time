@@ -43,6 +43,10 @@
 (defn ^:export start-loop [name]
   (start-loop! name))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Custom Controls                                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn update-tempo2 [name tempo]
   (swap! (. (get-sketch-by-id name) -quil) assoc :tempo2 tempo))
 
