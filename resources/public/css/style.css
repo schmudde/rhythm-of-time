@@ -1,2 +1,8 @@
-/* some style */
+.tempo-box > span, .tempo-box > input {
+    vertical-align: top;
+}
 
+.tempo-box > input {
+    display: inline;
+    max-width: 75%;
+}
