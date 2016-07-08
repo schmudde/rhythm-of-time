@@ -47,8 +47,5 @@
 ;;  Custom Controls                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn update-tempo2 [name tempo]
-  (swap! (. (get-sketch-by-id name) -quil) assoc :tempo2 tempo))
-
-(defn ^:export update-tempo [name]
-  (swap! (. (get-sketch-by-id name) -quil) assoc :tempo2 120 :tempo1 60))
+(defn update-tempo [name tempo-track tempo]
+  (swap! (. (get-sketch-by-id name) -quil) assoc (keyword tempo-track) tempo))

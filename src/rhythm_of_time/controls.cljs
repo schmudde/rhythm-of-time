@@ -12,12 +12,14 @@
 
 (dommy/listen! (sel1 :#film-button) :click toggle-sequencer!)
 
-(defn tempo-update []
-  (let [default-tempo (dommy/attr (sel1 :#tempo) :defaultValue)
-        tempo (dommy/value (sel1 :#tempo))]
-    (println tempo)
+(defn tempo-update [tempo-slider]
+  (let [tempo-keyword (keyword (str "#" tempo-slider))
+        default-tempo (dommy/attr (sel1 tempo-keyword) :defaultValue)
+        tempo (dommy/value (sel1 tempo-keyword))]
     (if tempo
-      (js-api/update-tempo2 "sequencer" tempo)
-      (js-api/update-tempo2 "sequencer" default-tempo))))
+      (js-api/update-tempo "sequencer" tempo-slider tempo)
+      (js-api/update-tempo "sequencer" tempo-slider default-tempo))))
 
-(dommy/listen! (sel1 :#tempo) :click tempo-update)
+(dommy/listen! (sel1 :#tempo1) :click (fn [] (tempo-update "tempo1")))
+
+(dommy/listen! (sel1 :#tempo2) :click (fn [] (tempo-update "tempo2")))

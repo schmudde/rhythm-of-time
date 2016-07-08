@@ -39,8 +39,12 @@
           <button onclick="resetSequencer();">Reset</button>
         </div> <!-- /col-xs-12 sm-4 -->
         <div class="col-xs-12 col-sm-4 tempo-box">
-          <span>Tempo:</span>
-          <input id="tempo" type="range" min="1" max="120" step="1" defaultValue="60">
+          <span>Tempo 1:</span>
+          <input id="tempo1" class="tempo-button" type="range" min="1" max="120" step="1" defaultValue="120">
+        </div> <!-- /col-xs-12 sm-4 -->
+        <div class="col-xs-12 col-sm-4 tempo-box">
+          <span>Tempo 2:</span>
+          <input id="tempo2" class="tempo-button" type="range" min="1" max="120" step="1" defaultValue="60">
         </div> <!-- /col-xs-12 sm-4 -->
       </div> <!-- /row -->
 
@@ -75,10 +79,6 @@
 
       function stopSketch() {
       rhythm_of_time.quil_js_api.stop_loop("sequencer");
-      }
-
-      function adjustTempo() {
-      rhythm_of_time.quil_js_api.update_tempo("sequencer");
       }
 
       function resetSequencer() {
