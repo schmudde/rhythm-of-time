@@ -1,32 +1,15 @@
 (ns rhythm-of-time.sequencer
   (:require [quil.core :as q :include-macros true]
-;            [quil.sketch :as ap :include-macros true]
             [quil.middleware :as m]
             [rhythm-of-time.synthesizer :as synth]
-            [rhythm-of-time.controls :as cntrl]))
-
-
-(def tempo-state (atom {}))
-
-(defn get-tempo [key]
-  (@tempo-state key))
-
-(defn update-tempo-state [key val]
-  (swap! tempo-state assoc key val))
+            [rhythm-of-time.controls :as cntrl]
+            [rhythm-of-time.quil-js-api :as js-api]))
 
 
 (defn setup []
   (q/frame-rate 5)
   (q/color-mode :rgb)
-  {:stages '(1 0 0 0 0 0 0 0)
-   :frequencies [500 600 700 800 900 1000 1100 1200]
-   :stages2 '(1 0 0 0 0 0 0 0)
-   :frequencies2 [1000 1200 1400 1600 1800 2000 2200 2400]
-   :audio1 true
-   :audio2 true
-   :tempo1 120 ;; currently, nothing > 120 works as a maximum tempo
-   :tempo2 60}  ;; currently, 0 does not work as a minimum tempo
-  )
+  (js-api/get-defaults))
 
 (defn frame-rate-scaler [tempo]
   "baseline-tempo / frame-rate = tempo / x. If tempo=120 then returns the equivalent to (q/frame-rate)"
@@ -97,56 +80,12 @@
       (draw-stage! (stage-value (nth (:stages2 state) i)) i 20))
     ))
 
-(defn update-tempo [state]
-  (assoc-in state [:tempo2] 120))
-
 (defn browser-detection [] js/navigator.userAgent)
-
-(defn reset [state]
-  (-> state
-    (assoc-in [:stages] '(0 0 0 0 0 0 0 1)) ; note that this starts at the end of the sequence
-    (assoc-in [:frequencies] [500 600 700 800 900 1000 1100 1200])
-    (assoc-in [:stages2] '(0 0 0 0 0 0 0 1)) ; note that this starts at the end of the sequence
-    (assoc-in [:frequencies2] [1000 1200 1400 1600 1800 2000 2200 2400])))
-
-(defn stop! [state]
-  (cntrl/toggle-sequencer! 0)
-  (q/no-loop)
-  state)
-
-(defn start! [state]
-  (q/start-loop)
-  state)
-
-(defn ^:export state-js [sketch]
-  (q/with-sketch sketch (clj->js (q/state))))
-
-(defn ^:export state [sketch]
-    (js/console.log (q/with-sketch sketch (q/state)))
-  (q/with-sketch sketch (q/state)))
-
-;; (defn ^:export update-tempo3 [sketch]
-;;   (let [current-state (q/with-sketch sketch (q/state))]
-;;     (js/console.log "tempo!!!!!!!!")
-;;     (println current-state)
-;;     (update-state current-state)))
-
-(defn get-sketch-by-id [name]
-  (q/get-sketch-by-id name))
-
-(defn interactive [state event]
-  (case (str (:raw-key event))
-    "s" (stop! state)
-    "b" (start! state)
-    "t" (update-state (update-tempo state))
-    "r" (reset state)
-    state))
 
 (q/defsketch sequencer
   :host "sequencer"
   :setup setup
   :draw draw-state
   :update update-state
-  :key-pressed interactive
   :size [260 80]
   :middleware [m/fun-mode])
