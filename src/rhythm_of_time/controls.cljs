@@ -14,11 +14,21 @@
 
 (defn tempo-update [tempo-slider]
   (let [tempo-keyword (keyword (str "#" tempo-slider))
-        default-tempo (dommy/attr (sel1 tempo-keyword) :defaultValue)
+        default-tempo (@js-api/seq-defaults (keyword tempo-slider))
         tempo (dommy/value (sel1 tempo-keyword))]
     (if tempo
       (js-api/update-tempo "sequencer" tempo-slider tempo)
       (js-api/update-tempo "sequencer" tempo-slider default-tempo))))
+
+(defn tempo-defaults! [tempo-slider]
+  "This function only sets the controls to default, not the actual values"
+  (let [tempo-keyword (keyword (str "#" tempo-slider))
+        default-tempo (@js-api/seq-defaults (keyword tempo-slider))]
+    (dommy/set-value! (sel1 tempo-keyword) default-tempo)))
+
+(defn ^:export reset-sequencer [name]
+  (doall (map #(tempo-defaults! %) ["tempo1" "tempo2"]))
+  (js-api/reset-state name))
 
 (dommy/listen! (sel1 :#tempo1) :click (fn [] (tempo-update "tempo1")))
 

@@ -9,6 +9,8 @@
 (defn setup []
   (q/frame-rate 5)
   (q/color-mode :rgb)
+  ;; Setup the display sliders
+  (doall (map #(cntrl/tempo-defaults! %) ["tempo1" "tempo2"]))
   (js-api/get-defaults))
 
 (defn frame-rate-scaler [tempo]
@@ -59,8 +61,8 @@
 
 (defn gain-value [audio-on-off]
   (if audio-on-off
-    ;0.1
-    0.0
+    0.1
+    ;0.0
     0.0))
 
 (defn draw-stage! [stage position-x position-y]

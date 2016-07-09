@@ -8,7 +8,7 @@
    :frequencies2 [1000 1200 1400 1600 1800 2000 2200 2400]
    :audio1 true
    :audio2 true
-   :tempo1 120 ;; currently, nothing > 120 works as a maximum tempo
+   :tempo1 85 ;; currently, nothing > 120 works as a maximum tempo
    :tempo2 60}  ;; currently, 0 does not work as a minimum tempo
   ))
 
