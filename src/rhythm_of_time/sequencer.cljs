@@ -61,8 +61,8 @@
 
 (defn gain-value [audio-on-off]
   (if audio-on-off
-    0.1
-    ;0.0
+    ;0.1
+    0.0
     0.0))
 
 (defn draw-stage! [stage position-x position-y]
