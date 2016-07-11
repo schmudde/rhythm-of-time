@@ -1,6 +1,7 @@
 (ns rhythm-of-time.sequencer
   (:require [quil.core :as q :include-macros true]
             [quil.middleware :as m]
+            [cljs.reader :as reader]
             [rhythm-of-time.synthesizer :as synth]
             [rhythm-of-time.controls :as cntrl]
             [rhythm-of-time.quil-js-api :as js-api]))
@@ -8,6 +9,7 @@
 
 (defn setup []
   (q/frame-rate 5)
+  (q/stroke-weight 2)
   (q/color-mode :rgb)
   ;; Setup the display sliders
   (doall (map #(cntrl/tempo-defaults! %) ["tempo1" "tempo2"]))
@@ -55,6 +57,12 @@
        :tempo2 (:tempo2 state)}
 ))
 
+;; (defn zero-through-nine []
+;;   "returns a value 0-9 based on the frame number. loops forever"
+;;   (let [frame (q/frame-count)
+;;         current-frame (last (str frame))]
+;;     (reader/read-string current-frame)))
+
 (defn stage-value [stage-state]
   "takes a stage state, 0 or 1, and prepares it for drawing"
   (* stage-state 255))
@@ -65,10 +73,28 @@
     0.0
     0.0))
 
+(defn draw-stroke! [weight green-value x y width height]
+    (q/stroke-weight weight)
+    (q/stroke 255 green-value 255)
+    (q/ellipse x y width height)
+  )
+
 (defn draw-stage! [stage position-x position-y]
-    (q/fill 255 255 255 stage)
-    (q/stroke 200 200 200)
-    (q/ellipse (+ 50 (* position-x 20)) (+ 30 position-y) 15 15))
+  (let [intensity (q/frame-count)
+        height 15
+        width 15
+        x (+ (* position-x 20) width)
+        y (+ height position-y)]
+
+    (if (even? intensity)
+      (q/fill 255 240 255 (- stage 20))
+      (q/fill 255 255 255 stage))
+
+    (if (not (zero? stage))
+      (draw-stroke! 6 100 x y width height))
+
+    (draw-stroke! 4 200 x y width height)
+    (draw-stroke! 2 255 x y width height)))
 
 (defn draw-state [state]
   "Side effect: draws state onto screen"
@@ -89,5 +115,6 @@
   :setup setup
   :draw draw-state
   :update update-state
-  :size [260 80]
+  :settings #(q/smooth 2)             ;; Turn on anti-aliasing
+  :size [170 50]
   :middleware [m/fun-mode])

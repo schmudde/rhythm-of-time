@@ -1,0 +1,89 @@
+/* div { */
+/*   border: 1px solid red; */
+/* } */
+
+@sequencer-width: 170px;
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    background-color: black;
+}
+
+p {
+    font-weight: 300;
+}
+
+.tempo-box > p, .tempo-box > input {
+    display: inline;
+    vertical-align: top;
+}
+
+.tempo-box > p {
+    padding-right: 10px;
+}
+
+.tempo-box > input {
+    max-width: @sequencer-width;
+}
+
+.melody-timbre-box {
+}
+
+.table {
+    max-width: @sequencer-width;
+    margin-bottom: 0;
+
+    @media (max-width: @screen-xs-max) {
+        .center-block();
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.jumbotron {
+    background-color: black;
+}
+
+button {
+    color: black;
+}
+
+.sequencer-row {
+    .make-row;
+    padding-bottom: 15px;
+
+    canvas {
+        padding-bottom: 15px;
+    }
+}
+
+.sequencer-xs12-sm4 {
+  .make-sm-column-offset(4);
+  .make-sm-column(4);
+  .make-xs-column(12);
+  .text-center;
+}
+
+.pitch-xs12-sm4 {
+  .make-sm-column(4);
+  .make-xs-column(12);
+  .text-left;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-top: none;
+}
+
+tr {
+    border-top: none;
+}
+
+tr:first-child {
+    border-top: 1px solid white;
+}

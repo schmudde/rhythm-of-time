@@ -27,7 +27,7 @@
   (js-api/stop-loop! "sequencer")
   (reset-sequencer "sequencer")
   (dommy/toggle! (sel1 :#movie))
-  (doall (map dommy/toggle! (sel :.sequencer))))
+  (doall (map dommy/toggle! (sel :.sequencer-row))))
 
 (dommy/listen! (sel1 :#film-button) :click toggle-sequencer!)
 
