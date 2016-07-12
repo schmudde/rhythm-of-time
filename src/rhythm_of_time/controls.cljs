@@ -19,7 +19,7 @@
     (dommy/set-value! (sel1 tempo-keyword) default-tempo)))
 
 (defn ^:export reset-sequencer [name]
-  (doall (map #(tempo-defaults! %) ["tempo1" "tempo2"]))
+  (doall (map #(tempo-defaults! %) [js-api/tempo-id-trk1 js-api/tempo-id-trk2]))
   (js-api/reset-state name))
 
 (defn toggle-sequencer! [e]
@@ -31,6 +31,8 @@
 
 (dommy/listen! (sel1 :#film-button) :click toggle-sequencer!)
 
-(dommy/listen! (sel1 :#tempo1) :change (fn [] (tempo-update "tempo1")))
+(dommy/listen! (sel1 (keyword (str "#" js-api/tempo-id-trk1))) :change
+               (fn [] (tempo-update js-api/tempo-id-trk1)))
 
-(dommy/listen! (sel1 :#tempo2) :change (fn [] (tempo-update "tempo2")))
+(dommy/listen! (sel1 (keyword (str "#" js-api/tempo-id-trk2))) :change
+               (fn [] (tempo-update js-api/tempo-id-trk2)))

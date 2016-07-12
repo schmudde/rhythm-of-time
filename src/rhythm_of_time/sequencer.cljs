@@ -12,7 +12,7 @@
   (q/stroke-weight 2)
   (q/color-mode :rgb)
   ;; Setup the display sliders
-  (doall (map #(cntrl/tempo-defaults! %) ["tempo1" "tempo2"]))
+  (doall (map #(cntrl/tempo-defaults! %) [js-api/tempo-id-trk1 js-api/tempo-id-trk2]))
   (js-api/get-defaults))
 
 (defn frame-rate-scaler [tempo]
