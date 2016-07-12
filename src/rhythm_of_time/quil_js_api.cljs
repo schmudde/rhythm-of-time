@@ -1,8 +1,11 @@
 (ns rhythm-of-time.quil-js-api
   (:require [quil.core :as q :include-macros true]))
 
-(def tempo-id-trk1 "tempo1")
-(def tempo-id-trk2 "tempo2")
+; The name of the tempo id for each track
+; The HTML5 markup has the same id as the CLJS atom keyword
+; If they are not the same, the program will fail
+(def tempo-id-trk1 "tempo-trk1")
+(def tempo-id-trk2 "tempo-trk2")
 
 (def seq-defaults (atom
   {:stages '(1 0 0 0 0 0 0 0)

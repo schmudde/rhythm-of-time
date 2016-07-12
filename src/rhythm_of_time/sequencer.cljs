@@ -41,20 +41,23 @@
 
 (defn update-state [state]
   "returns the new state"
-  (let [stages (:stages state)
+  (let [tempo-trk1 (keyword js-api/tempo-id-trk1)
+        tempo-trk2 (keyword js-api/tempo-id-trk2)
+
+        stages (:stages state)
         stages2 (:stages2 state)
         frequency-list (:frequencies state)
         frequency-list2 (:frequencies2 state)
-        sequencer1 (advancer stages frequency-list (:tempo1 state))
-        sequencer2 (advancer stages2 frequency-list2 (:tempo2 state))]
+        sequencer1 (advancer stages frequency-list (tempo-trk1 state))
+        sequencer2 (advancer stages2 frequency-list2 (tempo-trk2 state))]
       {:stages (:stage sequencer1)
        :frequencies (:frequency sequencer1)
        :audio1 (:audio sequencer1)
        :stages2 (:stage sequencer2)
        :frequencies2 (:frequency sequencer2)
        :audio2 (:audio sequencer2)
-       :tempo1 (:tempo1 state)
-       :tempo2 (:tempo2 state)}
+       tempo-trk1 (tempo-trk1 state)
+       tempo-trk2 (tempo-trk2 state)}
 ))
 
 ;; (defn zero-through-nine []
