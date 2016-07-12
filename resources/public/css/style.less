@@ -2,11 +2,19 @@
 /*   border: 1px solid red; */
 /* } */
 
+/* ******************* */
+/* variables           */
+/* ******************* */
+
 @sequencer-width: 170px;
 @pink-foreground: #ffc8ff; /* RGB: 255, 200, 255 */
 @yellow-foreground: #ffffc7;
 @blue-foreground: #c7ffff;
 @font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+/* ******************* */
+/* tag overrides       */
+/* ******************* */
 
 body {
     /* font-family: 'Roboto', sans-serif; */
@@ -20,16 +28,9 @@ p {
     font-weight: 300;
 }
 
-.jumbotron h1 {
-    color: @yellow-foreground;
-    font-weight: 100;
-    font-size: 70px;
-
-    small { color: @blue-foreground;
-            font-size: 50%;
-            font-weight: 300;
-            font-variant: small-caps;}
-}
+/* ******************* */
+/* RoT classes & ids   */
+/* ******************* */
 
 .tempo-box {
     padding-top: 25px;
@@ -51,18 +52,6 @@ p {
 .controls {
     max-width: 240px;
     margin: 0 auto;
-}
-
-.table {
-    width: 100%;
-    .center-block();
-    margin-top: 10px;
-    margin-bottom: 20px;
-    display: inline-table;
-}
-
-.jumbotron {
-    background-color: black;
 }
 
 .sequencer-row {
@@ -104,6 +93,55 @@ p {
         max-width: 300px;
         margin: 30px auto 0 auto;
     }
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#film-button {
+    animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        background-color: @blue-foreground;
+    }
+    50% {
+        background-color: @yellow-foreground;
+    }
+}
+
+#movie {
+    margin: 50px 0;
+}
+
+/* ******************* */
+/* bootstrap overrides */
+/* ******************* */
+
+.jumbotron h1 {
+    color: @yellow-foreground;
+    font-weight: 100;
+    font-size: 70px;
+
+    small { color: @blue-foreground;
+            font-size: 50%;
+            font-weight: 300;
+            font-variant: small-caps;}
+}
+
+.jumbotron {
+    background-color: black;
+}
+
+.table {
+    width: 100%;
+    .center-block();
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: inline-table;
 }
 
 .table > thead > tr > th,
@@ -149,9 +187,4 @@ button {
 
 .container {
     max-width: 750px;
-}
-
-.flex-container {
-    display: flex;
-    justify-content: space-between;
 }
