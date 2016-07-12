@@ -29,7 +29,14 @@
   (dommy/toggle! (sel1 :#movie))
   (doall (map dommy/toggle! (sel :.sequencer-row))))
 
+(defn melody [melody-select]
+  (js-api/set-melody! melody-select))
+
 (dommy/listen! (sel1 :#film-button) :click toggle-sequencer!)
+
+(dommy/listen! (sel1 :#melody-i) :click (fn [] (melody "i")))
+
+(dommy/listen! (sel1 :#melody-ii) :click (fn [] (melody "ii")))
 
 (dommy/listen! (sel1 (keyword (str "#" js-api/tempo-id-trk1))) :change
                (fn [] (tempo-update js-api/tempo-id-trk1)))
