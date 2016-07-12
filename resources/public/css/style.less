@@ -77,9 +77,14 @@ p {
 }
 
 .sequencer-xs12-sm4 {
-  .make-sm-column-offset(1);
   .make-sm-column(5);
   .make-xs-column(12);
+}
+
+.text-col-xs12-sm4 {
+    .make-sm-column(6);
+    .make-xs-column(12);
+    .make-sm-column-offset(1);
 }
 
 .sequencer-col {
@@ -87,16 +92,15 @@ p {
 }
 
 .text-col {
-    .text-left;
+    .text-justify;
     border-top: 1px solid @pink-foreground;
     padding-top: 10px;
 
     p {
-        font-size: 16px;
+        font-size: 17px;
     }
 
     @media (max-width: @screen-xs-max) {
-        .text-justify;
         max-width: 300px;
         margin: 30px auto 0 auto;
     }

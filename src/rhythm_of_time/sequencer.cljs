@@ -69,8 +69,8 @@
 
 (defn gain-value [audio-on-off]
   (if audio-on-off
-    ;0.1
-    0.0
+    0.1
+    ;0.0
     0.0))
 
 (defn draw-stroke! [weight green-value x y width height]
