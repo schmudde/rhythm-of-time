@@ -31,6 +31,6 @@
 
 (dommy/listen! (sel1 :#film-button) :click toggle-sequencer!)
 
-(dommy/listen! (sel1 :#tempo1) :click (fn [] (tempo-update "tempo1")))
+(dommy/listen! (sel1 :#tempo1) :change (fn [] (tempo-update "tempo1")))
 
-(dommy/listen! (sel1 :#tempo2) :click (fn [] (tempo-update "tempo2")))
+(dommy/listen! (sel1 :#tempo2) :change (fn [] (tempo-update "tempo2")))

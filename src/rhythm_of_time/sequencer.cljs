@@ -87,8 +87,8 @@
         y (+ height position-y)]
 
     (if (even? intensity)
-      (q/fill 255 240 255 (- stage 20))
-      (q/fill 255 255 255 stage))
+      (q/fill 255 230 255 (- stage 15))
+      (q/fill 255 245 255 stage))
 
     (if (not (zero? stage))
       (draw-stroke! 6 100 x y width height))
