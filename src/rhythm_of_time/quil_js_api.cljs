@@ -1,16 +1,34 @@
 (ns rhythm-of-time.quil-js-api
   (:require [quil.core :as q :include-macros true]))
 
+; The DEFAULT name of the tempo id for each track
+; The HTML5 markup has the same id as the CLJS atom keyword
+; If they are not the same, the program will fail
+(def tempo-id-trk1 "tempo-trk1")
+(def tempo-id-trk2 "tempo-trk2")
+
 (def seq-defaults (atom
   {:stages '(1 0 0 0 0 0 0 0)
-   :frequencies [500 600 700 800 900 1000 1100 1200]
+   :frequencies-i-1 [220 246.942 261.626 293.665 329.628 349.228 391.995 440]
+   :frequencies-ii-1 [800 700 600 500 400 300 200 100]
    :stages2 '(1 0 0 0 0 0 0 0)
-   :frequencies2 [1000 1200 1400 1600 1800 2000 2200 2400]
+   :frequencies-i-2 [261.626 293.665 329.628 349.228 391.995 440 493.883 523.251]
+   :frequencies-ii-2 [800 400 700 300 600 200 500 100]
    :audio1 true
    :audio2 true
-   :tempo1 120 ;; currently, nothing > 120 works as a maximum tempo
-   :tempo2 60}  ;; currently, 0 does not work as a minimum tempo
+   (keyword tempo-id-trk1) 85 ;; currently, nothing > 120 works as a maximum tempo
+   (keyword tempo-id-trk2) 60}  ;; currently, 0 does not work as a minimum tempo
   ))
+
+(def melody (atom {:track1 "frequencies-i-1" :track2 "frequencies-i-2"}))
+
+(defn set-melody! [melody-select]
+  (case melody-select
+    "i" (reset! melody {:track1 "frequencies-i-1" :track2 "frequencies-i-2"})
+    "ii" (reset! melody {:track1 "frequencies-ii-1" :track2 "frequencies-ii-2"})
+    (reset! {:track1 "frequencies-i-1" :track2 "frequencies-i-2"})))
+
+(defn get-melody [] @melody)
 
 (defn get-defaults [] @seq-defaults)
 
@@ -47,8 +65,5 @@
 ;;  Custom Controls                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn update-tempo2 [name tempo]
-  (swap! (. (get-sketch-by-id name) -quil) assoc :tempo2 tempo))
-
-(defn ^:export update-tempo [name]
-  (swap! (. (get-sketch-by-id name) -quil) assoc :tempo2 120 :tempo1 60))
+(defn update-tempo [name tempo-track tempo]
+  (swap! (. (get-sketch-by-id name) -quil) assoc (keyword tempo-track) tempo))
