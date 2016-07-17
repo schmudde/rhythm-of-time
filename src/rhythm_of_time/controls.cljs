@@ -15,10 +15,16 @@
       (seq/update-tempo "sequencer" tempo-slider default-tempo))))
 
 (defn tempo-defaults! [tempo-slider]
-  "This function only sets the controls to default, not the actual values"
+  "this function only sets a single slider position to default, not the actual value"
   (let [tempo-keyword (keyword (str "#" tempo-slider))
         default-tempo (@seq/seq-defaults (keyword tempo-slider))]
     (dommy/set-value! (sel1 tempo-keyword) default-tempo)))
+
+
+(defn tempo-slider-defaults! [tempo-slider tempo-value]
+  "this function only sets a single slider position to default, not the actual value"
+  (let [tempo-keyword (keyword (str "#" tempo-slider))]
+    (dommy/set-value! (sel1 tempo-keyword) tempo-value)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Sequencer Controls                                  ;;

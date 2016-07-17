@@ -59,9 +59,6 @@
   (q/frame-rate 5)
   (q/stroke-weight 2)
   (q/color-mode :rgb)
-  ;; THIS IS REALLY A DOMMY THING THAT NEEDS TO BE REFACTORED ELSEWHERE
-  ;; Setup the display sliders
-;  (doall (map #(cntrl/tempo-defaults! %) [tempo-id-trk1 tempo-id-trk2]))
   @seq-defaults)
 
 (defn stop-loop! []
