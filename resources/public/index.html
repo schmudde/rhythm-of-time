@@ -95,12 +95,12 @@
       }
 
       function stopSketch() {
-      rhythm_of_time.quil_js_api.stop_loop("sequencer");
-      rhythm_of_time.controls.reset_sequencer("sequencer");
+        rhythm_of_time.quil_js_api.stop_loop("sequencer");
+        rhythm_of_time.quil_js_api.reset_state("sequencer");
       }
 
       function resetSequencer() {
-        rhythm_of_time.controls.reset_sequencer("sequencer");
+        rhythm_of_time.quil_js_api.reset_state("sequencer");
       }
     </script>
 

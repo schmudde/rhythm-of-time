@@ -1,5 +1,6 @@
 (ns rhythm-of-time.core
-  (:require [rhythm-of-time.sequencer :as seq]))
+  (:require [rhythm-of-time.sequencer :as seq]
+            [rhythm-of-time.quil-js-api :as js-api]))
 
 (enable-console-print!)
 
