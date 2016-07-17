@@ -20,7 +20,6 @@
         default-tempo (@seq/seq-defaults (keyword tempo-slider))]
     (dommy/set-value! (sel1 tempo-keyword) default-tempo)))
 
-
 (defn tempo-slider-defaults! [tempo-slider tempo-value]
   "this function only sets a single slider position to default, not the actual value"
   (let [tempo-keyword (keyword (str "#" tempo-slider))]
