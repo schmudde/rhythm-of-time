@@ -5,16 +5,20 @@
 
 (enable-console-print!)
 
-(println "This text is printed from src/rhythm-of-time/core.cljs. Reload")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Set DOM defaults                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(tempo-cntrl/tempo-slider-defaults! "tempo-trk1" (@seq/seq-defaults (keyword "tempo-trk1")))
-(tempo-cntrl/tempo-slider-defaults! "tempo-trk2" (@seq/seq-defaults (keyword "tempo-trk2")))
+;; this dude sets the HTML5 slider position to the default values
+(doall (map #(tempo-cntrl/tempo-slider-defaults! % (@seq/seq-defaults (keyword %))) (seq/get-tempo-track-names)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Load Sequencer                                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (seq/sequencer)
 
 ;; define your app data so that it doesn't get over-written on reload
-
 (defonce app-state (atom {:text "Hello world!"}))
-
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

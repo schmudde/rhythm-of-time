@@ -28,6 +28,9 @@
 (def tempo-id-trk1 "tempo-trk1")
 (def tempo-id-trk2 "tempo-trk2")
 
+(defn get-tempo-track-names []
+  (vector tempo-id-trk1 tempo-id-trk2))
+
 (defn update-tempo [name tempo-track tempo]
   (swap! (. (q/get-sketch-by-id name) -quil) assoc (keyword tempo-track) tempo))
 
