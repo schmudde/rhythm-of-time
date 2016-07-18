@@ -1,7 +1,7 @@
 (ns rhythm-of-time.core
   (:require [rhythm-of-time.sequencer :as seq]
             [rhythm-of-time.quil-js-api :as js-api]
-            [rhythm-of-time.controls :as tempo-cntrl :refer [tempo-slider-defaults!]]))
+            [rhythm-of-time.controls :as tempo-cntrl :refer [slider-defaults!]]))
 
 (enable-console-print!)
 
@@ -10,7 +10,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; this dude sets the HTML5 slider position to the default values
-(doall (map #(tempo-cntrl/tempo-slider-defaults! % (@seq/seq-defaults (keyword %))) (seq/get-tempo-track-names)))
+(doall (map #(tempo-cntrl/slider-defaults! % (@seq/seq-defaults (keyword %))) (seq/get-tempo-track-names)))
+
+
+(tempo-cntrl/slider-defaults! "volume" (@seq/audio-defaults :volume))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Load Sequencer                                      ;;

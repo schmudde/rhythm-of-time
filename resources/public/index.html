@@ -39,8 +39,8 @@
                   <td><button class="btn btn-default btn-small" id="melody-ii">II</button></td></tr>
                 <tr>
                   <th scope="row">Timbre</th>
-                  <td><button class="btn btn-default btn-small">A</button></td>
-                  <td><button class="btn btn-default btn-small">B</button></td></tr>
+                  <td><button class="btn btn-default btn-small" id="timbre-a">A</button></td>
+                  <td><button class="btn btn-default btn-small" id="timbre-b">B</button></td></tr>
               </tbody>
             </table>
           </div>
@@ -59,6 +59,9 @@
             <br />
             <p><small>Tempo 2</small></p>
             <input autocomplete="off" id="tempo-trk2" type="range" min="1" max="120" step="1">
+            <hr />
+            <p>Volume</p><br />
+            <input autocomplete="off" id="volume" type="range" min="0.0" max="1.0" step="0.05" value="0.15">
           </div>
 
         </div> <!-- /col -->

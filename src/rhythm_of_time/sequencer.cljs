@@ -19,7 +19,7 @@
 (defn get-melody [] @melody)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  Tempo Settings                                      ;;
+;;  Tempo Track Interface IDs                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; The DEFAULT name of the tempo id for each track
@@ -45,8 +45,8 @@
    :stages2 '(1 0 0 0 0 0 0 0)
    :frequencies-i-2 [261.626 293.665 329.628 349.228 391.995 440 493.883 523.251]
    :frequencies-ii-2 [800 400 700 300 600 200 500 100]
-   :audio1 true
-   :audio2 true
+   :audio1 true ;; determines whether or not the audio sounds on
+   :audio2 true ;; a frame refresh
    (keyword tempo-id-trk1) 85 ;; currently, nothing > 120 works as a maximum tempo
    (keyword tempo-id-trk2) 60}  ;; currently, 0 does not work as a minimum tempo
   ))
@@ -67,6 +67,13 @@
 (defn stop-loop! []
   (q/no-loop))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Audio Settings                                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def audio-defaults (atom
+                     {:volume 0.15
+                      :synth "sine"}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Framerate & Tempo Sync Functions                    ;;
@@ -147,9 +154,17 @@
   "takes a stage state, 0 or 1, and prepares it for drawing"
   (* stage-state 255))
 
-(defn draw-stroke! [weight green-value x y width height]
+(defn select-fill-color []
+    ; set the sequencer color based on the melody selected
+    (case (@melody :track1)
+      "frequencies-i-1" [255 245 255] ; pink
+      "frequencies-ii-1" [255 255 199] ; yellow
+      [255 245 255]) ; pink
+  )
+
+(defn draw-stroke! [weight green blue x y width height]
     (q/stroke-weight weight)
-    (q/stroke 255 green-value 255)
+    (q/stroke 255 green blue)
     (q/ellipse x y width height)
   )
 
@@ -158,17 +173,21 @@
         height 15
         width 15
         x (+ (* position-x 20) width)
-        y (+ height position-y)]
+        y (+ height position-y)
+        lower-intensity 15
+        red (nth (select-fill-color) 0)
+        green (nth (select-fill-color) 1)
+        blue (nth (select-fill-color) 2)]
 
     (if (even? intensity)
-      (q/fill 255 230 255 (- stage 15))
-      (q/fill 255 245 255 stage))
+      (q/fill red (- green lower-intensity) blue (- stage 15))
+      (q/fill red green blue stage))
 
     (if (not (zero? stage))
-      (draw-stroke! 6 100 x y width height))
+      (draw-stroke! 6 100 blue x y width height))
 
-    (draw-stroke! 4 200 x y width height)
-    (draw-stroke! 2 255 x y width height)))
+    (draw-stroke! 4 200 255 x y width height)
+    (draw-stroke! 2 255 blue x y width height)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Audio Functions                                     ;;
@@ -178,9 +197,17 @@
 
 (defn gain-value [audio-on-off]
   (if audio-on-off
-    0.1
-    ;0.0
+    (@audio-defaults :volume)
     0.0))
+
+(defn set-synth! [synth-select]
+  (case synth-select
+    "a" (swap! audio-defaults assoc :synth "sine")
+    "b" (swap! audio-defaults assoc :synth "sawtooth")
+    (swap! audio-defaults assoc :synth "sine")))
+
+(defn synth-type []
+  (@audio-defaults :synth))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Quil Sketch Functions                               ;;
@@ -193,8 +220,12 @@
   (let [length-of-sequencer (count (:stages state))
         track1 (keyword ((get-melody) :track1))
         track2 (keyword ((get-melody) :track2))]
-    (synth/ping! (first (track1 state)) (gain-value (:audio1 state)))
-    (synth/ping! (first (track2 state)) (gain-value (:audio2 state)))
+    (synth/ping! (first (track1 state))
+                 (gain-value (:audio1 state))
+                 (synth-type))
+    (synth/ping! (first (track2 state))
+                 (gain-value (:audio2 state))
+                 (synth-type))
     (dotimes [i length-of-sequencer]
       (draw-stage! (stage-value (nth (:stages state) i)) i 0)
       (draw-stage! (stage-value (nth (:stages2 state) i)) i 20))
