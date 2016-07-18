@@ -33,15 +33,14 @@
 ;;  Sequencer Controls                                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn ^:export reset-sequencer [name]
+(defn reset-sequencer [name]
   (doall (map #(tempo-defaults! %) [seq/tempo-id-trk1 seq/tempo-id-trk2]))
   (seq/reset-defaults! name))
 
-(defn toggle-sequencer! [e]
+(defn toggle-sequencer! []
   "Stop sequencer, hide sequencer and its controls, and show the movie"
-  (seq/stop-loop!)
   (reset-sequencer "sequencer")
-  (dommy/toggle! (sel1 :#movie))
+;  (dommy/toggle! (sel1 :#movie))
   (doall (map dommy/toggle! (sel :.sequencer-row))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -75,4 +74,4 @@
 ;;  Page Controls                                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(dommy/listen! (sel1 :#film-button) :click toggle-sequencer!)
+;(dommy/listen! (sel1 :#film-button) :click toggle-sequencer!)

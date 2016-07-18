@@ -64,8 +64,8 @@
   (q/color-mode :rgb)
   @seq-defaults)
 
-(defn stop-loop! []
-  (q/no-loop))
+;; (defn stop-loop! []
+;;   (q/no-loop))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Audio Settings                                      ;;

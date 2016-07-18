@@ -22,3 +22,6 @@
 
 (defn ^:export start-loop [name]
   (start-loop! name))
+
+(defn ^:export hide-canvas-controls []
+  (cntrl/toggle-sequencer!))

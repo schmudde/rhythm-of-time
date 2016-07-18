@@ -70,7 +70,7 @@
           <div class="text-col">
           <p>Like the electronic music sequencer, the narrative threads of our life run in parallel. Sometimes these threads are in sync and everything falls into place, other times they clash in a dissonant racket.</p>
           <p>The notes of our past repeat indefinitely into the future.</p><br />
-            <button id="film-button" class="btn btn-default" name="sequencer" type="button">Turn the Page &gt;&gt;</button>
+            <button id="film-button" class="btn btn-default" name="sequencer" type="button" onclick="turnPage();">Turn the Page &gt;&gt;</button>
           </div>
         </div> <!-- /col -->
       </div> <!-- /row -->
@@ -104,6 +104,11 @@
 
       function resetSequencer() {
         rhythm_of_time.quil_js_api.reset_state("sequencer");
+      }
+
+      function turnPage() {
+        stopSketch();
+        rhythm_of_time.quil_js_api.hide_canvas_controls("sequencer");
       }
     </script>
 
