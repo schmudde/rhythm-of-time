@@ -117,10 +117,6 @@ p {
     margin: 50px 0;
 }
 
-#back-to-sequencer {
-    display: none;
-}
-
 /* ******************* */
 /* bootstrap overrides */
 /* ******************* */
@@ -182,7 +178,6 @@ button {
     font-size: 10px;
 }
 
-
 .btn-default:hover {
     background-color: @yellow-foreground;
     border-color: #fff;
@@ -205,4 +200,47 @@ button {
 
 .container {
     max-width: 750px;
+}
+
+.container .jumbotron, .container-fluid .jumbotron {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 24px;
+}
+
+/* ******************* */
+/* CSS Animations      */
+/* ******************* */
+
+/* For WebKit web-browsers: Chrome/Safari */
+@-webkit-keyframes slideDown {
+    0%, 100% { -webkit-transform: translateY(-50px); }
+    10%, 90% { -webkit-transform: translateY(0px); }
+}/* For Gecko: Mozilla Firefox */
+@-moz-keyframes slideDown {
+    0%, 100% { -moz-transform: translateY(-50px); }
+    10%, 90% { -moz-transform: translateY(0px); }
+}
+
+.slide-Down /* Slide-Down effect */
+{
+    -webkit-transform: translateY(-50px);
+    -webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
+    -moz-transform:    translateY(-50px);
+    -moz-animation:    slideDown 2.5s 1.0s 1 ease forwards;
+}
+
+.sliding-effect
+{
+    -webkit-transition:     max-height .8s ease-out, opacity .8s ease 0.0s;
+    -moz-transition:        max-height .8s ease-out, opacity .8s ease 0.0s;
+    -o-transition:          max-height .8s ease-out, opacity .8s ease 0.0s;
+    -ms-transition:         max-height .8s ease-out, opacity .8s ease 0.0s;
+    transition:             max-height .8s ease-out, opacity .8s ease 0.0s;
+
+    /* To hide by default, setting max-height
+              and opacity = 0 */
+    max-height:     800;
+    opacity:        1;
+    overflow:       hidden;
 }

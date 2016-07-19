@@ -40,7 +40,6 @@
 (defn toggle-sequencer! []
   "Stop sequencer, hide sequencer and its controls, and show the movie"
   (reset-sequencer "sequencer")
-  (doall (map dommy/toggle! (sel :.sequencer-row)))
   (dommy/toggle! (sel1 :#back-to-sequencer)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
