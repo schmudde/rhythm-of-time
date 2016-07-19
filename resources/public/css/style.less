@@ -8,8 +8,8 @@
 
 @sequencer-width: 170px;
 @pink-foreground: #ffc8ff; /* RGB: 255, 200, 255 */
-@yellow-foreground: #ffffc7;
-@blue-foreground: #c7ffff;
+@yellow-foreground: #ffffc7; /* RGB: 255, 255, 199 */
+@blue-foreground: #c7ffff; /* RGB: 199, 255, 255 */
 @font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 /* ******************* */
@@ -26,6 +26,22 @@ body {
 
 p {
     font-weight: 300;
+}
+
+a {
+    color: @yellow-foreground;
+}
+
+a:hover, a:focus {
+    color: @blue-foreground;
+}
+
+a:active {
+    color: @pink-foreground;
+}
+
+footer {
+    padding-bottom: 15px;
 }
 
 /* ******************* */
@@ -79,6 +95,38 @@ p {
 .sequencer-col {
   .text-center;
 }
+
+.turn-back-col-sm8 {
+    .hidden-xs;
+    .make-sm-column(8);
+
+    p {
+        font-size: 17px;
+    }
+}
+
+.turn-back-col-sm4-xs12 {
+    .make-sm-column(4);
+    .make-xs-column(12);
+
+    @media (max-width: @screen-xs-max) {
+        .text-right;
+        padding-right: 30px;
+    }
+}
+
+.footer-social-col8-12 {
+    .make-sm-column(8);
+    .make-xs-column(12);
+}
+
+.footer-clojure-col4 {
+    .make-sm-column(4);
+    .make-xs-column(12);
+    text-align: right;
+}
+
+.small-title { color: #aaa }
 
 .text-col {
     .text-justify;
@@ -178,6 +226,11 @@ button {
     font-size: 10px;
 }
 
+.btn-default:hover {
+    background-color: @yellow-foreground;
+    border-color: #fff;
+    color: #333;
+}
 
 .btn-default:hover {
     background-color: @yellow-foreground;
@@ -185,6 +238,57 @@ button {
     color: #333;
 }
 
+#melody-i:hover {
+    background-color: @pink-foreground;
+}
+
+#timbre-a:hover, #timbre-b:hover {
+    background-color: @blue-foreground;
+}
+
 .container {
     max-width: 750px;
+}
+
+.container .jumbotron, .container-fluid .jumbotron {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 24px;
+}
+
+/* ******************* */
+/* CSS Animations      */
+/* ******************* */
+
+/* For WebKit web-browsers: Chrome/Safari */
+@-webkit-keyframes slideDown {
+    0%, 100% { -webkit-transform: translateY(-50px); }
+    10%, 90% { -webkit-transform: translateY(0px); }
+}/* For Gecko: Mozilla Firefox */
+@-moz-keyframes slideDown {
+    0%, 100% { -moz-transform: translateY(-50px); }
+    10%, 90% { -moz-transform: translateY(0px); }
+}
+
+.slide-Down /* Slide-Down effect */
+{
+    -webkit-transform: translateY(-50px);
+    -webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
+    -moz-transform:    translateY(-50px);
+    -moz-animation:    slideDown 2.5s 1.0s 1 ease forwards;
+}
+
+.sliding-effect
+{
+    -webkit-transition:     max-height .8s ease-out, opacity .8s ease 0.0s;
+    -moz-transition:        max-height .8s ease-out, opacity .8s ease 0.0s;
+    -o-transition:          max-height .8s ease-out, opacity .8s ease 0.0s;
+    -ms-transition:         max-height .8s ease-out, opacity .8s ease 0.0s;
+    transition:             max-height .8s ease-out, opacity .8s ease 0.0s;
+
+    /* To hide by default, setting max-height
+              and opacity = 0 */
+    max-height:     800;
+    opacity:        1;
+    overflow:       hidden;
 }

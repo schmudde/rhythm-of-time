@@ -19,13 +19,12 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="jumbotron">
-            <h1>The Rhythm of Time<br />
-            <small>The past loops into the present</small></h1>
+            <h1>The Rhythm of Time</h1>
           </div>
         </div> <!-- /col-xs-12 -->
       </div> <!-- /row -->
 
-      <div class="sequencer-row">
+      <div class="sequencer-row sliding-effect" id="sequencer-row">
         <div class="sequencer-xs12-sm4 sequencer-col">
           <canvas id="sequencer"></canvas>
 
@@ -39,8 +38,8 @@
                   <td><button class="btn btn-default btn-small" id="melody-ii">II</button></td></tr>
                 <tr>
                   <th scope="row">Timbre</th>
-                  <td><button class="btn btn-default btn-small">A</button></td>
-                  <td><button class="btn btn-default btn-small">B</button></td></tr>
+                  <td><button class="btn btn-default btn-small" id="timbre-a">A</button></td>
+                  <td><button class="btn btn-default btn-small" id="timbre-b">B</button></td></tr>
               </tbody>
             </table>
           </div>
@@ -59,6 +58,9 @@
             <br />
             <p><small>Tempo 2</small></p>
             <input autocomplete="off" id="tempo-trk2" type="range" min="1" max="120" step="1">
+            <hr />
+            <p>Volume</p><br />
+            <input autocomplete="off" id="volume" type="range" min="0.0" max="1.0" step="0.05" value="0.15">
           </div>
 
         </div> <!-- /col -->
@@ -67,9 +69,18 @@
           <div class="text-col">
           <p>Like the electronic music sequencer, the narrative threads of our life run in parallel. Sometimes these threads are in sync and everything falls into place, other times they clash in a dissonant racket.</p>
           <p>The notes of our past repeat indefinitely into the future.</p><br />
-            <button id="film-button" class="btn btn-default" name="sequencer" type="button">Turn the Page &gt;&gt;</button>
+            <button id="film-button" class="btn btn-default" name="sequencer" type="button" onclick="turnPage();">Turn the Page &gt;&gt;</button>
           </div>
         </div> <!-- /col -->
+      </div> <!-- /row -->
+
+      <div class="row" id="back-to-sequencer" style="display: none;">
+        <div class="turn-back-col-sm8">
+          <p>The notes of our past repeat indefinitely into the future.</p>
+        </div> <!-- /turn-back-col-sm8 -->
+        <div class="turn-back-col-sm4-xs12">
+            <button id="film-button" class="btn btn-default" name="sequencer" type="button" onclick="turnBack();">&lt;&lt; Back to the Sequencer</button>
+        </div> <!-- /turn-back-col-sm4-xs12 -->
       </div> <!-- /row -->
 
       <hr />
@@ -81,28 +92,26 @@
           </div>
         </div> <!-- /col-xs-12 -->
       </div> <!-- /row -->
-
-      <footer class="footer">
-        <hr />
-        <p>Made With ClojureScript</p>
-      </footer>
     </div> <!-- /container -->
 
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="footer-social-col8-12">
+            <span class="socialIcons" id="logoContainer">
+              <a href="http://www.schmud.de" target="_blank" class="popupShare">Author: D. Schm&uuml;dde</a>
+            </span>
+          </div> <!-- /column -->
+          <div class="footer-clojure-col4 small-title">
+            <img src="img/clojure.png" alt="Clojure Logo" /> &nbsp;<small>Made With ClojureScript</small>
+          </div> <!-- /column -->
+        </div> <!-- /row -->
+      </div> <!-- /container -->
+      </footer>
+
+    <script src="js/interactions.js" type="text/javascript"></script>
     <script src="js/compiled/rhythm_of_time.js" type="text/javascript"></script>
-    <script type="application/javascript">
-      function startSketch() {
-        rhythm_of_time.quil_js_api.start_loop("sequencer");
-      }
-
-      function stopSketch() {
-      rhythm_of_time.quil_js_api.stop_loop("sequencer");
-      rhythm_of_time.controls.reset_sequencer("sequencer");
-      }
-
-      function resetSequencer() {
-        rhythm_of_time.controls.reset_sequencer("sequencer");
-      }
-    </script>
 
   </body>
 </html>
