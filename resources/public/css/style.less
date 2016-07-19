@@ -80,6 +80,25 @@ p {
   .text-center;
 }
 
+.turn-back-col-sm8 {
+    .hidden-xs;
+    .make-sm-column(8);
+
+    p {
+        font-size: 17px;
+    }
+}
+
+.turn-back-col-sm4-xs12 {
+    .make-sm-column(4);
+    .make-xs-column(12);
+
+    @media (max-width: @screen-xs-max) {
+        .text-right;
+        padding-right: 30px;
+    }
+}
+
 .text-col {
     .text-justify;
     border-top: 1px solid @pink-foreground;
