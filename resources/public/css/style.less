@@ -28,6 +28,22 @@ p {
     font-weight: 300;
 }
 
+a {
+    color: @yellow-foreground;
+}
+
+a:hover, a:focus {
+    color: @blue-foreground;
+}
+
+a:active {
+    color: @pink-foreground;
+}
+
+footer {
+    padding-bottom: 15px;
+}
+
 /* ******************* */
 /* RoT classes & ids   */
 /* ******************* */
@@ -98,6 +114,19 @@ p {
         padding-right: 30px;
     }
 }
+
+.footer-social-col8-12 {
+    .make-sm-column(8);
+    .make-xs-column(12);
+}
+
+.footer-clojure-col4 {
+    .make-sm-column(4);
+    .make-xs-column(12);
+    text-align: right;
+}
+
+.small-title { color: #aaa }
 
 .text-col {
     .text-justify;
