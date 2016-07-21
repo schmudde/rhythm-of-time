@@ -48,6 +48,14 @@ footer {
 /* RoT classes & ids   */
 /* ******************* */
 
+#film-button {
+    -webkit-animation: pulse 5s infinite;
+    -moz-animation: pulse 5s infinite;
+    -o-animation: pulse 5s infinite;
+    -ms-animation: pulse 5s infinite;
+    animation: pulse 5s infinite;
+}
+
 .tempo-box {
     padding-top: 25px;
 }
@@ -148,9 +156,6 @@ footer {
     justify-content: space-between;
 }
 
-#film-button {
-    animation: pulse 5s infinite;
-}
 
 @keyframes pulse {
     0%, 100% {
@@ -169,19 +174,61 @@ footer {
 /* bootstrap overrides */
 /* ******************* */
 
-.jumbotron h1 {
-    color: @yellow-foreground;
-    font-weight: 100;
-    font-size: 70px;
+.jumbotron {
 
-    small { color: @blue-foreground;
-            font-size: 50%;
-            font-weight: 300;
-            font-variant: small-caps;}
+    background-color: black;
+
+    h1 {
+        /* color: @yellow-foreground; */
+        font-weight: 100;
+        font-size: 70px;
+
+        small { color: @blue-foreground;
+                font-size: 50%;
+                font-weight: 300;
+                font-variant: small-caps;}
+
+        -webkit-animation: color-change 10s infinite;
+        -moz-animation: color-change 10s infinite;
+        -o-animation: color-change 10s infinite;
+        -ms-animation: color-change 10s infinite;
+        animation: color-change 10s infinite;
+    }
 }
 
-.jumbotron {
-    background-color: black;
+@keyframes color-change {
+    0% { color: @blue-foreground; }
+    33% { color: @pink-foreground; }
+    66% { color: @yellow-foreground; }
+    100% { color: @blue-foreground; }
+}
+
+@-o-keyframes color-change {
+    0% { color: @blue-foreground; }
+    33% { color: @pink-foreground; }
+    66% { color: @yellow-foreground; }
+    100% { color: @blue-foreground; }
+}
+
+@-ms-keyframes color-change {
+    0% { color: @blue-foreground; }
+    33% { color: @pink-foreground; }
+    66% { color: @yellow-foreground; }
+    100% { color: @blue-foreground; }
+}
+
+@-moz-keyframes color-change {
+    0% { color: @blue-foreground; }
+    33% { color: @pink-foreground; }
+    66% { color: @yellow-foreground; }
+    100% { color: @blue-foreground; }
+}
+
+@-webkit-keyframes color-change {
+    0% { color: @blue-foreground; }
+    33% { color: @pink-foreground; }
+    66% { color: @yellow-foreground; }
+    100% { color: @blue-foreground; }
 }
 
 .table {
