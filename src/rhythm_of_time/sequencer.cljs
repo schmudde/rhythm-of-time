@@ -144,12 +144,6 @@
        tempo-trk2 (tempo-trk2 state)}
 ))
 
-;; (defn zero-through-nine []
-;;   "returns a value 0-9 based on the frame number. loops forever"
-;;   (let [frame (q/frame-count)
-;;         current-frame (last (str frame))]
-;;     (reader/read-string current-frame)))
-
 (defn stage-value [stage-state]
   "takes a stage state, 0 or 1, and prepares it for drawing"
   (* stage-state 255))
@@ -194,6 +188,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn browser-detection [] js/navigator.userAgent)
+
+(defn one-note [] (synth/ping! 440 0.2 "saw"))
 
 (defn gain-value [audio-on-off]
   (if audio-on-off
