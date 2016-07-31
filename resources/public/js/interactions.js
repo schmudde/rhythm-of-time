@@ -2,7 +2,7 @@ var deviceName = "sequencer";
 var element = document.getElementById( 'sequencer-row' );
 
 function slideDown( elem ) {
-    elem.style.maxHeight = '800px';
+    elem.style.maxHeight = '870px';
     elem.style.opacity   = '1';
 }
 

@@ -78,6 +78,18 @@ footer {
     margin: 0 auto;
 }
 
+.mobile-audio {
+
+    display: none;
+    border-bottom: 1px solid @pink-foreground;
+    padding-bottom: 30px;
+    margin-bottom: 25px;
+
+    @media (max-width: @screen-xs-max) {
+           display: inline-block;
+    }
+}
+
 .sequencer-row {
     .make-row;
     padding-bottom: 15px;
@@ -198,35 +210,35 @@ footer {
 
 @keyframes color-change {
     0% { color: @blue-foreground; }
-    33% { color: @pink-foreground; }
+    33% { color: white; }
     66% { color: @yellow-foreground; }
     100% { color: @blue-foreground; }
 }
 
 @-o-keyframes color-change {
     0% { color: @blue-foreground; }
-    33% { color: @pink-foreground; }
+    33% { color: white;; }
     66% { color: @yellow-foreground; }
     100% { color: @blue-foreground; }
 }
 
 @-ms-keyframes color-change {
     0% { color: @blue-foreground; }
-    33% { color: @pink-foreground; }
+    33% { color: white; }
     66% { color: @yellow-foreground; }
     100% { color: @blue-foreground; }
 }
 
 @-moz-keyframes color-change {
     0% { color: @blue-foreground; }
-    33% { color: @pink-foreground; }
+    33% { color: white; }
     66% { color: @yellow-foreground; }
     100% { color: @blue-foreground; }
 }
 
 @-webkit-keyframes color-change {
     0% { color: @blue-foreground; }
-    33% { color: @pink-foreground; }
+    33% { color: white; }
     66% { color: @yellow-foreground; }
     100% { color: @blue-foreground; }
 }
@@ -254,7 +266,9 @@ tr {
 }
 
 tr:first-child {
-    border-top: 1px solid @pink-foreground;
+    @media (min-width: @screen-xs-max) {
+        border-top: 1px solid @pink-foreground;
+    }
 }
 
 button {
@@ -335,7 +349,7 @@ button {
 
     /* To hide by default, setting max-height
               and opacity = 0 */
-    max-height:     800;
+    max-height:     870;
     opacity:        1;
     overflow:       hidden;
 }

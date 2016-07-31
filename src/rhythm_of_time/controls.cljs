@@ -29,6 +29,12 @@
   (let [default-tempo (@seq/seq-defaults (keyword tempo-slider))]
     (slider-defaults! tempo-slider default-tempo)))
 
+(defn sound-toggle []
+  "iOS devices need an explicit touch to make the audio audible"
+  (seq/one-note))
+
+(dommy/listen! (sel1 :#sound) :click sound-toggle :touchend sound-toggle)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Sequencer Controls                                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
