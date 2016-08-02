@@ -1,5 +1,5 @@
 (ns rhythm-of-time.controls
-  (:require [dommy.core :as dommy :refer-macros [sel sel1]]
+  (:require [dommy.core :as dommy :refer-macros [sel1]]
             [rhythm-of-time.sequencer :as seq]
             [cljs.reader :as reader]))
 
@@ -33,7 +33,8 @@
   "iOS devices need an explicit touch to make the audio audible"
   (seq/one-note))
 
-(dommy/listen! (sel1 :#sound) :click sound-toggle :touchend sound-toggle)
+(dommy/listen! (sel1 :#sound) :touchend sound-toggle)
+(dommy/listen! (sel1 :#sound-2) :click sound-toggle :touchend sound-toggle)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Sequencer Controls                                  ;;
