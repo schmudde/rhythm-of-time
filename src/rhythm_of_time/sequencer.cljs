@@ -232,6 +232,6 @@
   :setup setup
   :draw draw-state
   :update update-state
-  :settings #(q/smooth 2)             ;; Turn on anti-aliasing
+  :settings #(q/smooth 2)             ;; turn on anti-aliasing
   :size [170 50]
   :middleware [m/fun-mode])
