@@ -1,6 +1,6 @@
 (defproject rhythm-of-time "0.1.0-SNAPSHOT"
   :description "A Simple Phase Sequencer Using Clojure/Overtone"
-  :url "http://therhythmoftime.com"
+  :url "http://rhythmoftime.xyz"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
