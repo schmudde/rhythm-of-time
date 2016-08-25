@@ -4,11 +4,18 @@ Music step sequencer for web browsers.
 
 ## Overview
 
-This is a phase sequencer. It's not ready for prime time.
+This is a simple two track step sequencer to help introduce people to the idea of electronic music sequencing. To those ends, the user is provided with melody, timbre, and tempo variations.
 
 ## Setup
 
-To get an interactive development environment run:
+### To create a production build:
+
+    lein do clean, lein cljsbuild once min
+
+And open your browser in `resources/public/index.html`. You will not
+get live reloading, nor a REPL.
+
+### To get an interactive development environment:
 
     lein figwheel
 
@@ -20,17 +27,6 @@ get a Browser Connected REPL. An easy way to try it is:
     (js/alert "Am I connected?")
 
 and you should see an alert in the browser window.
-
-To clean all compiled files:
-
-    lein clean
-
-To create a production build run:
-
-    lein do clean, cljsbuild once min
-
-And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL.
 
 ## License
 
